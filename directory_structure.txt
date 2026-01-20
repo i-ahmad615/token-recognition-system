@@ -1,0 +1,16 @@
+token-recognition-system/
+├── app/
+│   ├── __init__.py
+│   ├── lexer.py          # Core tokenization logic
+│   ├── routes.py         # Flask routes
+│   └── templates/
+│       └── index.html    # Web interface
+├── static/
+│   ├── css/
+│   │   └── style.css
+│   └── js/
+│       └── main.js
+├── uploads/              # Temporary file storage
+├── requirements.txt
+├── README.md
+└── main.py              # Application entry point

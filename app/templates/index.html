@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Token Recognition System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔍 Token Recognition System Using DFA</h1>
+            <p class="subtitle">Lexical Analyzer for Programming Languages</p>
+        </header>
+
+        <div class="main-content">
+            <!-- Input Section -->
+            <section class="input-section">
+                <h2>📝 Input Code</h2>
+                
+                <div class="tabs">
+                    <button class="tab-btn active" onclick="switchTab('text')">Type/Paste Code</button>
+                    <button class="tab-btn" onclick="switchTab('file')">Upload File</button>
+                </div>
+
+                <!-- Text Input Tab -->
+                <div id="text-tab" class="tab-content active">
+                    <textarea id="codeInput" placeholder="Enter your code here... 
+Example: 
+int main() {
+    int x = 10;
+    float y = 3.14;
+    if (x > 5) {
+        return x + y;
+    }
+    return 0;
+}"></textarea>
+                    <div class="button-group">
+                        <button class="btn btn-primary" onclick="tokenizeText()">
+                            <span>⚡</span> Tokenize
+                        </button>
+                        <button class="btn btn-secondary" onclick="clearInput()">
+                            <span>🗑️</span> Clear
+                        </button>
+                    </div>
+                </div>
+
+                <!-- File Upload Tab -->
+                <div id="file-tab" class="tab-content">
+                    <div class="file-upload-area">
+                        <input type="file" id="fileInput" accept=".c,.cpp,.py,. txt,.java,.js,.h,. hpp" onchange="handleFileSelect(event)">
+                        <label for="fileInput" class="file-label">
+                            <span class="upload-icon">📁</span>
+                            <span id="fileName">Choose a file or drag here</span>
+                            <span class="file-hint">Supported:  .c, .cpp, .py, .txt, .java, .js, .h, .hpp</span>
+                        </label>
+                    </div>
+                    <button class="btn btn-primary" onclick="tokenizeFile()" id="uploadBtn" disabled>
+                        <span>⚡</span> Tokenize File
+                    </button>
+                </div>
+            </section>
+
+            <!-- Output Section -->
+            <section class="output-section">
+                <h2>🎯 Tokens</h2>
+                
+                <!-- Loading Indicator -->
+                <div id="loading" class="loading" style="display: none;">
+                    <div class="spinner"></div>
+                    <p>Processing... </p>
+                </div>
+
+                <!-- Error Display -->
+                <div id="errorDisplay" class="error-display" style="display: none;"></div>
+
+                <!-- Lexical Errors Display -->
+                <div id="lexicalErrors" class="lexical-errors" style="display:  none;">
+                    <h3>⚠️ Lexical Errors</h3>
+                    <ul id="errorList"></ul>
+                </div>
+
+                <!-- Statistics -->
+                <div id="stats" class="stats" style="display: none;">
+                    <div class="stat-item">
+                        <span class="stat-label">Total Tokens:</span>
+                        <span class="stat-value" id="totalTokens">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Errors:</span>
+                        <span class="stat-value" id="errorCount">0</span>
+                    </div>
+                </div>
+
+                <!-- Token Table -->
+                <div id="tokenTableContainer" style="display: none;">
+                    <div class="table-wrapper">
+                        <table id="tokenTable">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Token Type</th>
+                                    <th>Value</th>
+                                    <th>Line</th>
+                                    <th>Position</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tokenTableBody">
+                                <!-- Tokens will be inserted here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Empty State -->
+                <div id="emptyState" class="empty-state">
+                    <span class="empty-icon">📋</span>
+                    <p>No tokens yet. Enter code or upload a file to get started. </p>
+                </div>
+            </section>
+        </div>
+
+        <footer>
+            <p>Built with DFA-based Lexical Analysis | By Ahmad Sharjeel</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
